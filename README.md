@@ -11,7 +11,7 @@ The ttyd licence is in ttyd_license file.
 ### Installation
 
 ```
-pip install git+https://github.com/NeveIsa/streamlit-ttyd
+pip install streamlit-ttyd
 ```
 
 
