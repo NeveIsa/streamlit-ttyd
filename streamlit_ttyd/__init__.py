@@ -62,8 +62,8 @@ def terminal(
         flags += "--readonly"
     
     # check if user provided path to ttyd
-    ttyd = get_ttyd() if ttyd!="" else ttyd
-    
+    ttyd = get_ttyd() if ttyd=="" else ttyd
+    # print(ttyd)    
     ttydproc = subprocess.Popen(
         f"{ttyd} {flags} {cmd}",
         stdout=subprocess.PIPE,
