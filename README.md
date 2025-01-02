@@ -46,3 +46,4 @@ ttydprocess.kill()
 - port: int -> port number to run the ttyd server on (default -> 0, automatically picked in the range 5000-7000)
 - exit_on_disconnect -> whether to kill ttyd server when web-terminal is disconnected (default -> True)
 - height: int -> height in pixels which is passed to streamlit.component.v1.iframe (default -> 500)
+- ttyd (optional): user provided path to ttyd binary, if not provided, uses distributed binary

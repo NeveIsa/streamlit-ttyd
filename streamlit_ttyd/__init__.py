@@ -48,6 +48,7 @@ def terminal(
     port: int = 0,
     exit_on_disconnect: bool = True,
     height: int = 400,
+    ttyd = ""
 ):
     assert type(port) == int
 
@@ -60,7 +61,9 @@ def terminal(
     if readonly:
         flags += "--readonly"
     
-    ttyd = get_ttyd()
+    # check if user provided path to ttyd
+    ttyd = get_ttyd() if ttyd!="" else ttyd
+    
     ttydproc = subprocess.Popen(
         f"{ttyd} {flags} {cmd}",
         stdout=subprocess.PIPE,
