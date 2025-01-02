@@ -1,9 +1,15 @@
+"""
+	This module provides a way to use a terminal under streamlit framework
+"""
+__version__ = "0.2.0"
+
 import platform
 import subprocess
 
 import psutil
 from port_for import get_port
 from streamlit.components.v1 import iframe
+from importlib import resources
 
 
 def is64bit():
@@ -30,6 +36,8 @@ def get_ttyd():
             # we dont care here if 64bit
             ttyd = "./binary/ttyd.x86_64"
 
+    ttyd = resources.files("streamlit_ttyd").joinpath(ttyd)
+    # print(ttyd)
     return ttyd
 
 
@@ -51,9 +59,10 @@ def terminal(
         flags += "--once "
     if readonly:
         flags += "--readonly"
-
+    
+    ttyd = get_ttyd()
     ttydproc = subprocess.Popen(
-        f"ttyd {flags} {cmd}",
+        f"{ttyd} {flags} {cmd}",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         shell=True,

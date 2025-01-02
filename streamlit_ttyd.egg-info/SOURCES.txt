@@ -1,8 +1,0 @@
-README.md
-setup.py
-streamlit_ttyd/__init__.py
-streamlit_ttyd.egg-info/PKG-INFO
-streamlit_ttyd.egg-info/SOURCES.txt
-streamlit_ttyd.egg-info/dependency_links.txt
-streamlit_ttyd.egg-info/requires.txt
-streamlit_ttyd.egg-info/top_level.txt

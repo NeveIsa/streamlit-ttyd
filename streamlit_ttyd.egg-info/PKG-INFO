@@ -1,8 +1,0 @@
-Metadata-Version: 2.1
-Name: streamlit_ttyd
-Version: 0.1.0
-Author: Sampad B Mohanty
-Author-email: sbmohant@usc.edu
-Requires-Dist: streamlit
-Requires-Dist: port-for
-Requires-Dist: psutil

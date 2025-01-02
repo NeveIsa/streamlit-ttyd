@@ -1,0 +1,19 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "streamlit-ttyd"
+authors = [{name = "Sampad B Mohanty", email = "smpdmohanty@gmail.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: MIT License"]
+dynamic = ["version", "description"]
+dependencies = ["streamlit", "port-for","psutil"]
+
+[project.urls]
+Homepage = "https://github.com/NeveIsa/streamlit_ttyd"
+
+
+[tool.flit.sdist]
+include = ["streamlit_ttyd/binary/"]
