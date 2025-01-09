@@ -10,7 +10,7 @@ import psutil
 from port_for import get_port
 from streamlit.components.v1 import iframe
 from importlib import resources
-
+import streamlit as st
 
 def is64bit():
     return "64" in platform.machine()
