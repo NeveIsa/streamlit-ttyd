@@ -41,6 +41,15 @@ def get_ttyd():
     return ttyd
 
 
+def get_host_url_with_port(port: int) -> str:
+    """Get the host URL."""
+    host_url = st.context.headers["host"]
+    try:
+        host, _streamlit_port = host_url.split(":", maxsplit=1)
+    except ValueError:
+        host = host_url
+    return f"//{host}:{port}"  # Use the same protocol
+    
 def terminal(
     cmd: str = "echo terminal-speaking... && sleep 99999",
     readonly: bool = False,
@@ -70,6 +79,9 @@ def terminal(
         stderr=subprocess.PIPE,
         shell=True,
     )
-    iframe(f"{host}:{port}", height=height)
+    
+    # check if streamlit running from another IP address
+    iframe_url = get_host_url_with_port(port)
+    iframe(f"{iframe_url}", height=height)
 
     return ttydproc, port
