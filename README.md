@@ -1,51 +1,69 @@
 # streamlit-ttyd
 
-streamlit_ttyd implements a terminal plugin for streamlit using the amazing [ttyd](https://github.com/tsl0922/ttyd) project.
-As of now, only Linux like platforms are supported.
+A [Streamlit](https://streamlit.io/) plugin that embeds a fully interactive terminal in your app, powered by the excellent [ttyd](https://github.com/tsl0922/ttyd) project.
 
-ttyd is MIT licenced which allows us to distribute the binaries as long as the associated licence is included. 
-The ttyd licence is in ttyd_license file.  
+## Platform Support
 
->>> Please open an issue if you need support for windows or other platforms. 
+| Platform | Architecture | Status |
+|----------|-------------|--------|
+| Linux    | x86_64, aarch64, arm | Supported |
+| macOS    | x86_64, aarch64 | Supported |
+| Windows  | — | Not yet supported |
 
-### Installation
+> If you need Windows or other platform support, please [open an issue](https://github.com/NeveIsa/streamlit-ttyd/issues).
 
-```
+## Installation
+
+```bash
 pip install streamlit-ttyd
 ```
 
-
-### Usage
+## Quick Start
 
 ```python
 import streamlit as st
 from streamlit_ttyd import terminal
-import time 
+import time
 
 st.text("Terminal showing processes running on your system using the top command")
 
-# start the ttyd server and display the terminal on streamlit
+# Start the ttyd server and display the terminal on Streamlit
 ttydprocess, port = terminal(cmd="top")
 
-# info on ttyd port
-st.text(f"ttyd server is running on port : {port}")
+# Info on ttyd port
+st.text(f"ttyd server is running on port: {port}")
 
-# kill the ttyd server after a minute
+# Kill the ttyd server after a minute
 time.sleep(60)
 ttydprocess.kill()
 ```
 
-### Demo 
----
-![demo](demo.png)
----
+## API Reference
 
-> Arguments for terminal()
+### `terminal(**kwargs) -> tuple[subprocess.Popen, int]`
 
-- cmd: str -> the command to run 
-- readonly: bool -> readonly terminal (default -> False)
-- host: str -> protocol://hostname where streamlit server is run (default -> http://localhost)
-- port: int -> port number to run the ttyd server on (default -> 0, automatically picked in the range 5000-7000)
-- exit_on_disconnect -> whether to kill ttyd server when web-terminal is disconnected (default -> True)
-- height: int -> height in pixels which is passed to streamlit.component.v1.iframe (default -> 500)
-- ttyd (optional): str -> user provided path to ttyd binary, if not provided, uses distributed binary
+Starts a ttyd server and embeds an interactive terminal iframe in the Streamlit app.
+
+**Returns:** A tuple of `(ttyd_process, port)`.
+
+**Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `cmd` | `str` | `"echo terminal-speaking... && sleep 99999"` | The shell command to run in the terminal |
+| `readonly` | `bool` | `False` | If `True`, the terminal is read-only (no user input) |
+| `host` | `str` | `"http://localhost"` | Protocol and hostname where the Streamlit server is running |
+| `port` | `int` | `0` | Port for the ttyd server. `0` auto-selects a free port in the 5000–7000 range |
+| `exit_on_disconnect` | `bool` | `True` | Kill the ttyd server when the web terminal disconnects |
+| `height` | `int` | `400` | Height of the terminal iframe in pixels |
+| `ttyd` | `str` | `""` | Custom path to a ttyd binary. If empty, uses the bundled binary |
+
+## Demo
+
+![streamlit-ttyd demo](demo.png)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+ttyd is also MIT licensed — its license is included in the [ttyd_license](ttyd_license) file.
